@@ -19,19 +19,21 @@ venn.plot <- venn.diagram(
   cat.pos = c(-20,20,180)  #相对12点方向旋转的角度
 )# 三元 venn
 
-venn.diagram(
+p1 <- venn.diagram(
   x = list(
-    chr22_100X=chr22_gff_methy,chr22_5X=chr22_5X_gff_methy,chr22_10X=chr22_10X_gff_methy,chr22_15X=chr22_15X_gff_methy
-    ,chr22_20X=chr22_20X_gff_methy),
-  filename = 'chr22_m4C&m6A.png',
+    "200X"=chr22_gff_methy_m4C,"5X"=chr22_5X_gff_methy_m4C,"10X"=chr22_10X_gff_methy_m4C,"15X"=chr22_15X_gff_methy_m4C
+    ,"20X"=chr22_20X_gff_methy_m4C),
+  #filename = 'chr22_m4C in 5X vs 10X vs 15X vs 20X vs 200X.png',
+  filename = NULL,
   col = "black",
   fill = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
   alpha = 0.5,
-  cex = 0.8,#内标签的字体大小
+  cex = 1.5,#内标签的字体大小
   cat.col = 'black',
-  cat.cex = 0.8,#外标签的字体大小
+  cat.cex = 1.5,#外标签的字体大小
   cat.fontface = "bold",
   margin = 0.05,
-  main = "venn of chr22 m4C & m6A methylation in different coverages",
-  main.cex = 1.2
-)#五元venn
+  main = "Venn of chr22 m4C methylation in different coverages",
+  main.cex = 1.5
+)#五元venn for m4C 
+grid.draw(p1)
