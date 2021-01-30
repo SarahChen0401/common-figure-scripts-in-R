@@ -1,0 +1,16 @@
+https://stackoverflow.com/questions/10762287/how-can-i-format-axis-labels-with-exponents-with-ggplot2-and-scales/45867076#45867076?newreg=b7aa6870a643497d87ac997ec6322fe0
+x <- c(0,1:4)
+
+y <- c(0, 0.0001, 0.0002, 0.0003,0.0002)*10000000
+
+dd <- data.frame(x, y)
+
+scientific_10 <- function(x) {
+  text=gsub("e", " %*% 10^", scales::scientific_format()(x))
+  text[match("0 %*% 10^+00",text)] = "0"
+  text=gsub("[+]","",text)
+  return(parse(text=gsub("^0 %*% 10^", "0", text ) )  )
+}
+
+ggplot(dd, aes(x, y)) + geom_point()+scale_y_continuous(label= scientific_10) 
+ggplot(dd, aes(x, y)) + geom_point()+scale_y_continuous(label= function(x) {ifelse(x==0, "0", parse(text=gsub("[+]", "", gsub("e", " %*% 10^", scales::scientific_format()(x)))))} )
